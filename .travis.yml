@@ -14,7 +14,7 @@ script:
  # Run docker snapshot of dev octave (until 4.4 is released)
  - did=$(sudo docker run -ti -d --rm -v `pwd`:/swe cmaumet/octave-spm)
  # Run tests in Octave
- - sudo docker exec -t -i $did bash -c "disp(eps)"
+ - sudo docker exec -t -i $did octave --no-window-system "disp(eps)"
 before_install:
  # Update docker version
  - sudo apt-get update
