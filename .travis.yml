@@ -10,11 +10,33 @@ python:
   - "3.5"
 bundler_args: --retry 9
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
-script:
- # Run docker snapshot of dev octave (until 4.4 is released)
- - did=$(sudo docker run -ti -d --rm -v `pwd`:/swe cmaumet/octave-spm)
- # Run tests in Octave
- - sudo docker exec -t -i $did octave --no-window-system --eval "disp(eps)"
+jobs:
+  include:
+    - stage: Results generation 
+      script:
+      - did=$(sudo docker run -ti -d --rm -v `pwd`:/swe cmaumet/octave-spm)
+      - sudo docker exec -t -i $did octave --no-window-system --eval "load('/swe/test/data/seed.mat');randn('state', seed);randp('state', seed);randg('state',seed);rande('state',seed);disp(mean(beta(0.05:0.01:20,0.05:0.01:20)));"
+    - script:
+      - did=$(sudo docker run -ti -d --rm -v `pwd`:/swe cmaumet/octave-spm)
+      - sudo docker exec -t -i $did octave --no-window-system --eval "load('/swe/test/data/seed.mat');randn('state', seed);randp('state', seed);randg('state',seed);rande('state',seed);disp(mean(beta(0.05:0.01:20,0.05:0.01:20)));"
+    - script:
+      - did=$(sudo docker run -ti -d --rm -v `pwd`:/swe cmaumet/octave-spm)
+      - sudo docker exec -t -i $did octave --no-window-system --eval "load('/swe/test/data/seed.mat');randn('state', seed);randp('state', seed);randg('state',seed);rande('state',seed);disp(mean(beta(0.05:0.01:20,0.05:0.01:20)));"
+    - script:
+      - did=$(sudo docker run -ti -d --rm -v `pwd`:/swe cmaumet/octave-spm)
+      - sudo docker exec -t -i $did octave --no-window-system --eval "load('/swe/test/data/seed.mat');randn('state', seed);randp('state', seed);randg('state',seed);rande('state',seed);disp(mean(beta(0.05:0.01:20,0.05:0.01:20)));"
+    - script:
+      - did=$(sudo docker run -ti -d --rm -v `pwd`:/swe cmaumet/octave-spm)
+      - sudo docker exec -t -i $did octave --no-window-system --eval "load('/swe/test/data/seed.mat');randn('state', seed);randp('state', seed);randg('state',seed);rande('state',seed);disp(mean(beta(0.05:0.01:20,0.05:0.01:20)));"
+    - script:
+      - did=$(sudo docker run -ti -d --rm -v `pwd`:/swe cmaumet/octave-spm)
+      - sudo docker exec -t -i $did octave --no-window-system --eval "load('/swe/test/data/seed.mat');randn('state', seed);randp('state', seed);randg('state',seed);rande('state',seed);disp(mean(beta(0.05:0.01:20,0.05:0.01:20)));"
+    - script:
+      - did=$(sudo docker run -ti -d --rm -v `pwd`:/swe cmaumet/octave-spm)
+      - sudo docker exec -t -i $did octave --no-window-system --eval "load('/swe/test/data/seed.mat');randn('state', seed);randp('state', seed);randg('state',seed);rande('state',seed);disp(mean(beta(0.05:0.01:20,0.05:0.01:20)));"
+    - script:
+      - did=$(sudo docker run -ti -d --rm -v `pwd`:/swe cmaumet/octave-spm)
+      - sudo docker exec -t -i $did octave --no-window-system --eval "load('/swe/test/data/seed.mat');randn('state', seed);randp('state', seed);randg('state',seed);rande('state',seed);disp(mean(beta(0.05:0.01:20,0.05:0.01:20)));"
 before_install:
  # Update docker version
  - sudo apt-get update
